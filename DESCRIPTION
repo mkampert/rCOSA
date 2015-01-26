@@ -1,0 +1,27 @@
+Package: rCOSA
+Title: Clustering Objects on Subsets of Attributes (COSA)
+Version: 0.1
+Date: 2013-12-29
+Author: Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman
+Maintainer: Maarten M.D. Kampert <mkampert@math.leidenuniv.nl>
+Description: WARNING BETA VERSION. Implements the method of Friedman and
+    Meulman (2004): "Clustering objects on subsets of attributes"; published in
+    JRRS-B volume(issue) pstart-pend. Familiarity with this JRSS-B paper is
+    assumed for those who will apply this package. Depends: R (>= 3.1.1), base
+Suggest: foreign
+Imports:
+    tools
+License: file LICENSE
+Collate:
+    'attimp.R'
+    'bplot.R'
+    'attvalues.R'
+    'boxw.R'
+    'cmds.R'
+    'cosa2.R'
+    'cosaversion.R'
+    'getclust.R'
+    'hierclust.R'
+    'plotimp.R'
+    'smacof.R'
+Packaged: 2014-01-21 14:43:11 UTC; maartenkampert
