@@ -1,3 +1,3 @@
-require(testthat)
+# require(testthat)
 
 # Put tests here later...

@@ -10,7 +10,7 @@
 #' @param groupnr groupnr when known, each object can be given a number to which group it belongs
 #' @param colv vector containing color names for each group number
 #' @param main title of the plot, by default there is no title. 
-#' @param pchset plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[stats]{points}}.
+#' @param pchset plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[graphics]{points}}.
 #' @param ... arguments which can be parsed to either the \code{\link[mva]{hclust}} and \code{\link[stats]{cmdscale}} procedures.
 #' @param PLOT whether to plot or not to plot, by default TRUE.
 #' @param VERBOSE whether to give a messages on the criterion for each iteration, by default set to equal TRUE.
