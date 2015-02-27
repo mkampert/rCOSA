@@ -20,7 +20,7 @@ smacof(D, normalize = TRUE, inicon = NULL, niter = 20, groupnr = NULL,
 
 \item{main}{title of the plot, by default there is no title.}
 
-\item{pchset}{plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[stats]{points}}.}
+\item{pchset}{plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[graphics]{points}}.}
 
 \item{...}{arguments which can be parsed to either the \code{\link[mva]{hclust}} and \code{\link[stats]{cmdscale}} procedures.}
 
