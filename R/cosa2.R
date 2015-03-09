@@ -125,6 +125,8 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
             "/execs/", platform, sep = "")
     }
 
+	wd <- getwd()
+    setwd(cosadir)
 
  
     # Targeting section
@@ -213,38 +215,33 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
         noit, stand)
 
 
-    	zz <- file(paste(cosadir, "/",fnameprefix,"iparms.cos", sep = ""), "wb")
+    	zz <- file(paste(fnameprefix,"iparms.cos", sep = ""), "wb")
 	    writeBin(as.integer(ic), zz, size = 4)
 	    close(zz)
 
-    	zz <- file(paste(cosadir, "/",fnameprefix,"lx.cos", sep = ""), "wb")
+    	zz <- file(paste(fnameprefix,"lx.cos", sep = ""), "wb")
 	    writeBin(as.integer(lXt), zz, size = 4)
     	close(zz)
 
-	    zz <- file(paste(cosadir, "/",fnameprefix,"rparms.cos", sep = ""), "wb")
+	    zz <- file(paste(fnameprefix,"rparms.cos", sep = ""), "wb")
     	writeBin(as.double(c(xmisst, lambda, qntls, relax, conv, pwr)), 
         zz, size = 4)
 	    close(zz)
 
-    	zz <- file(paste(cosadir, "/",fnameprefix,"data.cos", sep = ""), "wb")
+    	zz <- file(paste(fnameprefix,"data.cos", sep = ""), "wb")
 	    writeBin(as.double(X), zz, size = 4)
     	close(zz)
 
 	    if (ktarg == 0) {
-    	    zz <- file(paste(cosadir, "/",fnameprefix,"targs.cos", sep = ""), "wb")
+    	    zz <- file(paste(fnameprefix,"targs.cos", sep = ""), "wb")
         	writeBin(as.double(targ), zz, size = 4)
 	        close(zz)
     	}
 	    if (ltarg == 1) {
-    	    zz <- file(paste(cosadir, "/",fnameprefix,"dtargs.cos", sep = ""), "wb")
+    	    zz <- file(paste(fnameprefix,"dtargs.cos", sep = ""), "wb")
         	writeBin(as.double(targ2), zz, size = 4)
 	        close(zz)
     	}
-	    wd <- getwd()
-    	
-    	
-    	
-    	setwd(cosadir)
 
 		  #CLI usage: ./COSA_2 iparms.cos rparms.cos lx.cos data.cos targs.cos dtargs.cos dist.cos weights.cos tunpar.cos
 
@@ -259,16 +256,15 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
         
         )
 
-	    setwd(wd)
 	    	    
-    	zz = file(paste(cosadir, "/",fnameprefix,"dist.cos", sep = ""), "rb")
+    	zz = file(paste(fnameprefix,"dist.cos", sep = ""), "rb")
 	    dis = readBin(zz, numeric(), size = 4, n = nrx * (nrx - 1)/2)
     	close(zz)
 	    attr(dis, "Size") = nrx
     	class(dis) <- "dist"
 	    OUT$D = as.dist(dis)
     	if (wghts) {
-        	zz = file(paste(cosadir, "/",fnameprefix,"weights.cos", sep = ""), "rb")
+        	zz = file(paste(fnameprefix,"weights.cos", sep = ""), "rb")
 	        weights = readBin(zz, numeric(), size = 4, n = nrx * ncx)
 	        close(zz)
     	    weights = matrix(weights, ncol = ncx, nrow = nrx)
@@ -276,7 +272,7 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
 	        OUT$W = weights
     	}
 	    #if (sdat) {
-    	#    zz = file(paste(cosadir, "/",fnameprefix,"sdata.cos", sep = ""), "rb")
+    	#    zz = file(paste(fnameprefix,"sdata.cos", sep = ""), "rb")
         #	sdata = readBin(zz, numeric(), size = 4, n = nrx * ncx)
 	    #    close(zz)
     	#    DAT = matrix(sdata, ncol = ncx, nrow = nrx)
@@ -285,7 +281,7 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
    	    #}
     
 	    if (crit) {
-    	    zz = file(paste(cosadir, "/",fnameprefix,"tunpar.cos", sep = ""), "rb")
+    	    zz = file(paste(fnameprefix,"tunpar.cos", sep = ""), "rb")
         	tunpar = readBin(zz, numeric(), size = 4, n = 7)
 	        close(zz)
     	    #tunpar[5:7] = as.integer(tunpar[5:7]) # has no use.... all elements should have the same class.
@@ -294,10 +290,17 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
 	        OUT$tunpar = as.list(tunpar)
     	}
     	
- 	if (clean) {
-	    system(paste("rm ", cosadir, "/",fnameprefix,"*.cos", sep = ""))
+ 	if(clean & any(platform%in%c("win32","win64"))) {
+	    system(paste("cmd.exe /c DEL ", fnameprefix,"*.cos", sep = ""))
+	    #system(paste("rm ", cosadir, "/",fnameprefix,"*.666", sep = ""))
+    } else {
+    	    if(clean & any(platform%in%c("linux","OSx"))){
+    	    	system(paste("rm ", fnameprefix,"*.cos", sep = ""))
+    	    } 
 	    #system(paste("rm ", cosadir, "/",fnameprefix,"*.666", sep = ""))
     }
+    
+    	setwd(wd)# any function?
     return(OUT)
 }
 
