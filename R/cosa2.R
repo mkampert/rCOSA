@@ -262,7 +262,8 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
     	close(zz)
 	    attr(dis, "Size") = nrx
     	class(dis) <- "dist"
-	    OUT$D = as.dist(dis)
+	    OUT$D = as.dist(dis) 
+	    OUT$D = normdist(OUT$D)
     	if (wghts) {
         	zz = file(paste(fnameprefix,"weights.cos", sep = ""), "rb")
 	        weights = readBin(zz, numeric(), size = 4, n = nrx * ncx)

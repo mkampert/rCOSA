@@ -15,15 +15,15 @@
 #' similar output as \code{\link[stats]{cmdscale}}
 #' @export                                                                               
                                                                               
-cmds <- function (D, groupnr = NULL, main = NULL, colv = palette(), ..., PLOT = TRUE) {
+cmds <- function (D, groupnr = NULL, main = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], ..., PLOT = TRUE) {
     fit = cmdscale(D, eig = TRUE)
     x = fit$points[, 1]
     y = fit$points[, 2]
     if (PLOT) {
         if (is.null(groupnr)){
-            cols = 1
+            cols <- 1
 	    } else {
-            cols = colv[groupnr + 1]
+            cols <- colv[groupnr + 1]
         }
         lims = c(floor(100 * min(c(x), min(y)))/100, ceiling(100 * 
             max(c(max(x), max(y))))/100)
