@@ -3,7 +3,8 @@
 \alias{cmds}
 \title{Classical metric multidimensional scaling}
 \usage{
-cmds(D, groupnr = NULL, main = NULL, colv = palette(), ..., PLOT = TRUE)
+cmds(D, groupnr = NULL, main = NULL, colv = palette()[c(8, 2, 4, 3, 5, 6,
+  7, 1)], ..., PLOT = TRUE)
 }
 \arguments{
 \item{D}{dissimilarities/distances of class dist.}

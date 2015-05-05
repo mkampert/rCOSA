@@ -3,16 +3,18 @@
 \alias{smacof}
 \title{SMACOF}
 \usage{
-smacof(D, normalize = TRUE, inicon = NULL, niter = 20, groupnr = NULL,
-  colv = palette(), main = NULL, pchset = 20, ..., PLOT = TRUE,
-  VERBOSE = TRUE)
+smacof(D, niter = 100, interc = 1, inicon = NULL, groupnr = NULL,
+  colv = palette()[c(8, 2, 4, 3, 5, 6, 7, 1)], main = NULL, pch = 20,
+  PLOT = TRUE, VERBOSE = TRUE, ...)
 }
 \arguments{
 \item{D}{dissimilarities/distances of class dist.}
 
-\item{inicon}{intial configuration. By default this is specified as NULL, here the SMACOF algorithm specifies...}
-
 \item{niter}{max number of iterations to use, default is set to 20: 'to iterate is heaven, to converge is divine'. Convergence does not necessarily give you the best non-linear mapping of the dissimilarity structure.}
+
+\item{interc}{logical for including an additive constant in the smacof algorithm.}
+
+\item{inicon}{intial configuration. By default this is specified as NULL, here the SMACOF algorithm specifies...}
 
 \item{groupnr}{groupnr when known, each object can be given a number to which group it belongs}
 
@@ -20,15 +22,13 @@ smacof(D, normalize = TRUE, inicon = NULL, niter = 20, groupnr = NULL,
 
 \item{main}{title of the plot, by default there is no title.}
 
-\item{pchset}{plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[graphics]{points}}.}
-
-\item{...}{arguments which can be parsed to either the \code{\link[mva]{hclust}} and \code{\link[stats]{cmdscale}} procedures.}
-
 \item{PLOT}{whether to plot or not to plot, by default TRUE.}
 
-\item{VERBOSE}{whether to give a messages on the criterion for each iteration, by default set to equal TRUE.}
+\item{VERBOSE}{whether to give a stdout on the criterion for each iteration, by default set to equal TRUE.}
 
-\item{norm}{whether to normalize the dissimilarties. The default is set equal to \code{TRUE}}
+\item{...}{arguments which can be parsed to either the \code{\link[mva]{hclust}} or \code{\link[stats]{cmdscale}} procedures.}
+
+\item{pchset}{plotting 'character', i.e. symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with \code{pch = 0:18}. For more information see the help file of the function \code{\link[graphics]{points}}.}
 }
 \value{
 Similar output as \code{\link[stats]{cmdscale}}

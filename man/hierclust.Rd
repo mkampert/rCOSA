@@ -6,7 +6,7 @@
 hierclust(D, main = "", leaflab = c("perpendicular", "textlike", "none")[3],
   cex.main = NULL, denplot = TRUE, sub = "",
   xlab = "COSA dissimilarity clustering", ylab = "", method = "average",
-  groupnr = NULL, colv = palette(), ...)
+  groupnr = NULL, colv = palette()[c(8, 2, 4, 3, 5, 6, 7, 1)], ...)
 }
 \arguments{
 \item{D}{dissimilarities/distances of class dist.}
