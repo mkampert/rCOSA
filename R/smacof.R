@@ -76,7 +76,7 @@ smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, col
     	    	main = main, xlim = lims, ylim = lims,
     	    	xaxs = "i", yaxs = "i", pch = pch, col = cols, ...)
         	delta<-normdist(dhat)
-	        return(list(D=delta, X=xx, interc = interc, cols))	
+	        return(list(D=delta, X=xx, interc = interc))	
         }
     
 }
