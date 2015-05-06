@@ -269,8 +269,7 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
 	        weights = readBin(zz, numeric(), size = 4, n = nrx * ncx)
 	        close(zz)
     	    weights = matrix(weights, ncol = ncx, nrow = nrx)
-        	weights = weights * (ncx)
-	        OUT$W = weights
+        	OUT$W = weights * (ncx)*weights/rowSums(weights)
     	}
 	    #if (sdat) {
     	#    zz = file(paste(fnameprefix,"sdata.cos", sep = ""), "rb")
