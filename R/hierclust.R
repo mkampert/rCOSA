@@ -21,7 +21,7 @@
 hierclust <- function(D, main = "", leaflab = c("perpendicular", "textlike", "none")[3], cex.main = NULL, denplot = TRUE, sub = "", xlab = "COSA dissimilarity clustering", ylab = "", method = 'average', groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], ...){
 
 	# This is code based on the hclust function
-	hc <- hclust(D, method, ...)
+	hc <- hclust(D, method, method = method, ...)
 	hc$dendro <- as.dendrogram(hc, ...)
 
 	if(denplot){

@@ -18,7 +18,7 @@
 #'
 #' @export                                                                               
                                         
-smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = NULL, pch = 20, PLOT = TRUE, VERBOSE = TRUE, ...)
+smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = NULL, pch = 16, PLOT = TRUE, VERBOSE = TRUE, ...)
 {
         dhat<-ddelta<-D<-normdist(D)
         n<-dimdata(D)
@@ -48,8 +48,8 @@ smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, col
                   }
                }
         dd<-lowmat(dist(xx))
-            str=(sum((delta-dd)**2))**.5
-            # snorm<-fit(delta,dd)
+            #str=(sum((delta-dd)**2))**.5
+            str <- snorm <-fit(delta,dd)
 	        if(VERBOSE) cat("it = ", i, ",  crit = ", str, " \n")
 	        if( abs(str0 - str) < 1e-6 ) break
 	        str0 <- str
@@ -75,7 +75,7 @@ smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, col
     	     plot(xx, xlab = "Dimension 1", ylab = "Dimension 2",
     	    	main = main, xlim = lims, ylim = lims,
     	    	xaxs = "i", yaxs = "i", pch = pch, col = cols, ...)
-        	delta<-normdist(dhat)
+        	delta<- normdist(dhat)
 	        return(list(D=delta, X=xx, interc = interc))	
         }
     

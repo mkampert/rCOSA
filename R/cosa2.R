@@ -99,7 +99,7 @@
 #'
 #' @export
 
-cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)), 
+cosa2 <- function (X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)), 
     xmiss = NULL, lambda = 0.2, qntls = c(0.05, 0.95), wtcomb = "each", 
     relax = 0.1, conv = 1e-05, niter = 5, noit = 100, stand = 1, 
     cosadir = NULL, wghts = TRUE, crit = TRUE, clean = TRUE, fnameprefix = NULL, pwr = 1, ...) 
@@ -269,7 +269,7 @@ cosa2 <- function (X, lX = if(class(X) == 'data.frame'){NULL} else {1}, targ = N
 	        weights = readBin(zz, numeric(), size = 4, n = nrx * ncx)
 	        close(zz)
     	    weights = matrix(weights, ncol = ncx, nrow = nrx)
-        	OUT$W = weights * (ncx)*weights/rowSums(weights)
+        	OUT$W = (ncx)*weights/rowSums(weights)
     	}
 	    #if (sdat) {
     	#    zz = file(paste(fnameprefix,"sdata.cos", sep = ""), "rb")
