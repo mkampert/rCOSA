@@ -17,6 +17,7 @@ Collate:
     'bplot.R'
     'attvalues.R'
     'bmat.R'
+    'boxatt.R'
     'boxw.R'
     'cmds.R'
     'cosa2.R'

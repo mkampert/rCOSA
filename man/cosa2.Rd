@@ -3,12 +3,11 @@
 \alias{cosa2}
 \title{COSA 2 Dissimilarities}
 \usage{
-cosa2(X, lX = if (class(X) == "data.frame") {     NULL } else {     1 },
-  targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)), xmiss = NULL,
-  lambda = 0.2, qntls = c(0.05, 0.95), wtcomb = "each", relax = 0.1,
-  conv = 1e-05, niter = 5, noit = 100, stand = 1, cosadir = NULL,
-  wghts = TRUE, crit = TRUE, clean = TRUE, fnameprefix = NULL,
-  pwr = 1, ...)
+cosa2(X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)),
+  xmiss = NULL, lambda = 0.2, qntls = c(0.05, 0.95), wtcomb = "each",
+  relax = 0.1, conv = 1e-05, niter = 5, noit = 100, stand = 1,
+  cosadir = NULL, wghts = TRUE, crit = TRUE, clean = TRUE,
+  fnameprefix = NULL, pwr = 1, ...)
 }
 \arguments{
 \item{X}{input data.frame, or matrix object in numeric mode. COSA calculates the dissimilarities for the rows in X.}
@@ -97,7 +96,7 @@ out <- cosa2(X = iris[,1:4])
 hierclust(out$D)
 # The weight of object 1 on attribute 1 in the NxP weight matrix W
 out$W[1,1]
-# COSA procedure for dual targeted dissimilarities + transformed data is being asked using sdat
+# COSA procedure for dual targeted dissimilarities:
 out <- cosa2(X = iris[,1:4],lX = rep(3,ncol(iris[,1:4])),targ='high/low')
 }
 \author{

@@ -86,7 +86,7 @@
 #' hierclust(out$D)
 #' # The weight of object 1 on attribute 1 in the NxP weight matrix W
 #' out$W[1,1]
-#' # COSA procedure for dual targeted dissimilarities + transformed data is being asked using sdat
+#' # COSA procedure for dual targeted dissimilarities:
 #' out <- cosa2(X = iris[,1:4],lX = rep(3,ncol(iris[,1:4])),targ='high/low')                       
 #'
 #'
