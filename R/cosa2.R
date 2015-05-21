@@ -1,7 +1,8 @@
 
 #' COSA 2 Dissimilarities
 #'
-#'      *** ALPHA VERSION *** This function outputs a dissimilarity representation of the rows of a data matrix and corresponding weights computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+#'  *** BETA VERSION ***
+#'  This function outputs a dissimilarity representation of the rows of a data matrix computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
 #'
 #'
 #' @param X input data.frame, or matrix object in numeric mode. COSA calculates the dissimilarities for the rows in X.
@@ -74,7 +75,7 @@
 #'
 #' @references
 #' Friedman, J. H. and Meulman, J. J. (2004). Clustering objects on subsets of attributes. \cr URL: \url{http://www-stat.stanford.edu/~jhf/ftp/cosa.pdf}
-#'
+#' Kampert, M.M., Meulman J.J., Friedman J.H. (2015). rCOSA: A Software Package for Clustering Objects on Subsets of Attributes \cr URL: \url{http://pub.math.leidenuniv.nl/~kampertmmd/}
 #'
 #' @author Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman. \cr Correspondence: \email{mkampert@@math.leidenuniv.nl}
 #'

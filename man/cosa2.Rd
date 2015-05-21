@@ -84,7 +84,8 @@ When present the attribute values will be used whenever the corresponding argume
 This function outputs a list that has as the first element the call, as the second element the dissimilarity matrix \code{out$D} of class dist, and by default also the weights of class matrix, and, if \code{crit} is set to \code{TRUE}, the values of the tuning parameters are also given in the output. <-- MK: "In a newer version perhaps some other nice tweaks?"
 }
 \description{
-*** ALPHA VERSION *** This function outputs a dissimilarity representation of the rows of a data matrix and corresponding weights computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+*** BETA VERSION ***
+ This function outputs a dissimilarity representation of the rows of a data matrix computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
 }
 \note{
 The output dissimilarity matrix can be used as input to most dissimilarity based clustering procedures in R in the same manner as the output of the procedure \code{\link[stats]{dist}}.
@@ -104,6 +105,7 @@ Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman. \cr Corresp
 }
 \references{
 Friedman, J. H. and Meulman, J. J. (2004). Clustering objects on subsets of attributes. \cr URL: \url{http://www-stat.stanford.edu/~jhf/ftp/cosa.pdf}
+Kampert, M.M., Meulman J.J., Friedman J.H. (2015). rCOSA: A Software Package for Clustering Objects on Subsets of Attributes \cr URL: \url{http://pub.math.leidenuniv.nl/~kampertmmd/}
 }
 \seealso{
 \code{\link[stats]{hclust}} and other functions that will be mentioned during the development of this package.

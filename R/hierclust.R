@@ -18,7 +18,7 @@
 #' @return 
 #' Returns an invisible object of class dendrogram. If denplot is set to \code{TRUE} then the dendrogram is also plotted, and  when the groups are known one can ask for a colored dendrogram.
 #' @export                                                                               
-hierclust <- function(D, main = "Hierarchical Clustering of Dissimilarities", leaflab = c("perpendicular", "textlike", "none")[3], cex.main = NULL, denplot = TRUE, sub = "", xlab = "average linkage", ylab = "", method = 'average', groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], ...){
+hierclust <- function(D, main = "Hierarchical Clustering", leaflab = c("perpendicular", "textlike", "none")[3], cex.main = NULL, denplot = TRUE, sub = "", xlab = "", ylab = "", method = 'average', groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], ...){
 
 	# This is code based on the hclust function
 	hc <- hclust(D, method = method, ...)

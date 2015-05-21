@@ -3,11 +3,10 @@
 \alias{hierclust}
 \title{Hierarchical Clustering}
 \usage{
-hierclust(D, main = "Hierarchical Clustering of Dissimilarities",
-  leaflab = c("perpendicular", "textlike", "none")[3], cex.main = NULL,
-  denplot = TRUE, sub = "", xlab = "average linkage", ylab = "",
-  method = "average", groupnr = NULL, colv = palette()[c(8, 2, 4, 3, 5, 6,
-  7, 1)], ...)
+hierclust(D, main = "Hierarchical Clustering", leaflab = c("perpendicular",
+  "textlike", "none")[3], cex.main = NULL, denplot = TRUE, sub = "",
+  xlab = "", ylab = "", method = "average", groupnr = NULL,
+  colv = palette()[c(8, 2, 4, 3, 5, 6, 7, 1)], ...)
 }
 \arguments{
 \item{D}{dissimilarities/distances of class dist.}

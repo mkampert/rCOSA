@@ -4,8 +4,9 @@
 \title{SMACOF}
 \usage{
 smacof(D, niter = 100, interc = 1, inicon = NULL, groupnr = NULL,
-  colv = palette()[c(8, 2, 4, 3, 5, 6, 7, 1)], main = NULL, pch = 16,
-  PLOT = TRUE, VERBOSE = TRUE, ...)
+  colv = palette()[c(8, 2, 4, 3, 5, 6, 7, 1)],
+  main = "Multidimensional Scaling", pch = 16, PLOT = TRUE,
+  VERBOSE = TRUE, ...)
 }
 \arguments{
 \item{D}{dissimilarities/distances of class dist.}

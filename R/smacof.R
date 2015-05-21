@@ -18,7 +18,7 @@
 #'
 #' @export                                                                               
                                         
-smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = NULL, pch = 16, PLOT = TRUE, VERBOSE = TRUE, ...)
+smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = "Multidimensional Scaling", pch = 16, PLOT = TRUE, VERBOSE = TRUE, ...)
 {
         dhat<-ddelta<-D<-normdist(D)
         n<-dimdata(D)
