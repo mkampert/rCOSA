@@ -1,8 +1,7 @@
-
 #' COSA 2 Dissimilarities
 #'
 #'  *** BETA VERSION ***
-#'  This function outputs a dissimilarity representation of the rows of a data matrix computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+#'  This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
 #'
 #'
 #' @param X input data.frame, or matrix object in numeric mode. COSA calculates the dissimilarities for the rows in X.
@@ -41,8 +40,8 @@
 #' \cr
 #' @param qntls quantiles used for calculating high and/or low targets (ignored if \code{lX[j] = 0},\code{1},\code{4} or \code{targ} is NOT set to \code{"low"}, \code{"high"}, or \code{"high/low"}). \cr
 #' \cr
-#' \code{qntls[1]} = data quantile on each attribure used for low target \cr
-#' \code{qntls[2]} = data quantile on each attribure used for high target \cr
+#' \code{qntls[1]} = data quantile on each attribute used for low target \cr
+#' \code{qntls[2]} = data quantile on each attribute used for high target \cr
 #' \cr                                                                          
 #' NOTE: The \code{lX} vector and/or the value of \code{xmiss} can be specified as attributes to the input data matrix before invoking cosa \cr
 #' \code{attr(X,"lX")<-lX} \cr
@@ -54,11 +53,11 @@
 #' \cr
 # @param relax the number with which the homotopy parameter eta should be incremented at each outer iteration (for more info see noit)
 #' \cr
-# @param conv convergence treshold that can reduce the maximum number of inner iterations. <-- In a newer version of this package it will be specified how the number which is compared with this threshold is calculated.
+# @param conv the convergence treshold that can reduce the maximum number of inner iterations.
 #' \cr
 #' @param niter the maximum number of inner iterations to stabilize the weights and dissimilarties given the homotopy parameter
 #' \cr
-#' @param noit the number of outer iterations (make sure relax > 0) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end. <-- MK: "In a newer version this argument will hopefully be improved too."
+#' @param noit the number of outer iterations ( make sure relax > 0 ) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end. <-- MK: "In a newer version this argument will hopefully be improved too."
 #' \cr
 #' @param stand equals `?\code{0} for no standardisation?, \code{1} for robust scaling of the data, and \code{2} for standard scaling of the data.
 #' \cr

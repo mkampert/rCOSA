@@ -47,8 +47,8 @@ If only an integer scalar is give for \code{lX} than it is assumed that the inte
 
 \item{qntls}{quantiles used for calculating high and/or low targets (ignored if \code{lX[j] = 0},\code{1},\code{4} or \code{targ} is NOT set to \code{"low"}, \code{"high"}, or \code{"high/low"}). \cr
 \cr
-\code{qntls[1]} = data quantile on each attribure used for low target \cr
-\code{qntls[2]} = data quantile on each attribure used for high target \cr
+\code{qntls[1]} = data quantile on each attribute used for low target \cr
+\code{qntls[2]} = data quantile on each attribute used for high target \cr
 \cr
 NOTE: The \code{lX} vector and/or the value of \code{xmiss} can be specified as attributes to the input data matrix before invoking cosa \cr
 \code{attr(X,"lX")<-lX} \cr
@@ -63,7 +63,7 @@ When present the attribute values will be used whenever the corresponding argume
 \item{niter}{the maximum number of inner iterations to stabilize the weights and dissimilarties given the homotopy parameter
 \cr}
 
-\item{noit}{the number of outer iterations (make sure relax > 0) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end. <-- MK: "In a newer version this argument will hopefully be improved too."
+\item{noit}{the number of outer iterations ( make sure relax > 0 ) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end. <-- MK: "In a newer version this argument will hopefully be improved too."
 \cr}
 
 \item{stand}{equals `?\code{0} for no standardisation?, \code{1} for robust scaling of the data, and \code{2} for standard scaling of the data.
@@ -85,7 +85,7 @@ This function outputs a list that has as the first element the call, as the seco
 }
 \description{
 *** BETA VERSION ***
- This function outputs a dissimilarity representation of the rows of a data matrix computed by the COSA algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+ This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
 }
 \note{
 The output dissimilarity matrix can be used as input to most dissimilarity based clustering procedures in R in the same manner as the output of the procedure \code{\link[stats]{dist}}.
