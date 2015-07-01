@@ -35,7 +35,8 @@ getclust <- function (hc, ngr = 20, rec.col='blue',old.col='blue') {
 # plan: modify this function to make automatic clustering possible too. Using pam?
     retval <- list()                                                           
     oldk <- NULL                                                               
-    oldx <- NULL                                                               
+    oldx <- NULL     
+    cat("Showing dynamic visualisation. Press Escape/Ctrl + C to stop.")                                                        
     for (n in 1:ngr) {                                                           
         x <- locator(1)                                                        
         if (is.null(x))                                                        

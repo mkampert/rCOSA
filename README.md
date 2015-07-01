@@ -1,5 +1,7 @@
 # rCOSA
 
+Trial version available until December 29, 2015.
+
 ## Abstract
 rCOSA is an R package. The main output is a cluster happy dissimilarity matrix that can serve as input for proximity analysis methods.
 
