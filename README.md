@@ -12,4 +12,4 @@ These are the commands to install and load rCOSA in R:
 > install.packages('devtools'); require(devtools)
 > install_github('mkampert/rCOSA')
 > require(rCOSA) # load rCOSA
-```
+```# rCOSA
