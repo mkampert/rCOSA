@@ -5,11 +5,11 @@
 \title{Compute and plot relevance of the attributes for selected clusters}
 \usage{
 attimp(X, group, range = 1:min(20, ncol(X)), times = 0, lX = if (class(X)
-  == "data.frame") {     lX <- NULL } else {     lX <- 1 }, donames = T,
-  fast = F, trans = 1, maximp = 20, xmiss = NULL, horiz = F,
-  main = "Cluster", att.names = 1:ncol(X), names.size = 1, ylim = c(0,
-  wtave[o[1]]), ntick = 20, rlines = TRUE, targ = NULL, lwd = 1, ...,
-  cache = FALSE)
+  == "data.frame") {     lX <- NULL } else {     lX <- 1 }, donames = FALSE,
+  fast = FALSE, trans = 1, maximp = 20, xmiss = NULL, horiz = FALSE,
+  main = "Cluster", att.names = 1:ncol(X), ord.names = FALSE,
+  names.size = 1, ylim = c(0, wtave[o[1]]), ntick = 20, rlines = TRUE,
+  targ = NULL, lwd = 1, ..., cache = FALSE)
 }
 \arguments{
 \item{X}{data.frame or an input data matrix object of class matrix and mode numeric. Rows are objects and columns are attributes (variables).}

@@ -16,6 +16,7 @@ Collate:
     'attimp.R'
     'bplot.R'
     'attvalues.R'
+    'autoscale.R'
     'bmat.R'
     'boxatt.R'
     'boxw.R'

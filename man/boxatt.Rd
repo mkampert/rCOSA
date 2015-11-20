@@ -4,16 +4,28 @@
 \alias{boxatt}
 \title{Barplots of univariate attribute dispersion within groups}
 \usage{
-boxatt(X, grpnr, attr, ...)
+boxatt(data, imps, grps, main = "Consider a maintitle here",
+  ylab = "Consider a label here", xlab = "Consider a label here",
+  SCALE = TRUE, colors = palette(), ...)
 }
 \arguments{
-\item{grpnr}{object row numbers of a specific group}
+\item{data}{data matrix obtained from COSA analysis}
 
-\item{attr}{attribute column numbers ordererd from important to less important. To find out the order use \code{attimp}.}
+\item{imps}{typically a vector with attribute indices ordered on their importance}
+
+\item{grps}{...}
+
+\item{main}{...}
+
+\item{ylab}{...}
+
+\item{xlab}{...}
+
+\item{SCALE}{logical TRUE/FALSE, whether to scale the data}
+
+\item{colors}{...}
 
 \item{...}{named arguments to be passed to the default method.}
-
-\item{W}{weights matrix obtained from COSA analysis}
 }
 \value{
 values of attribute importances in requested order.
@@ -22,7 +34,7 @@ values of attribute importances in requested order.
 This function plots the attribute weights over groups.
 }
 \examples{
-#make sure an at object is available...
+make sure an at object is available...
 }
 \seealso{
 \code{\link[COSA]{attimp}}

@@ -16,8 +16,8 @@
 #' @return 
 #' values of attribute importances in requested order.                         
 #'
-#' @examples[]
-#'  #make sure an at object is available...
+#' @examples
+#'  make sure an at object is available...
 #'
 #' @seealso
 #' \code{\link[COSA]{attimp}}
