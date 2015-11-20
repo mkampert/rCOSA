@@ -56,8 +56,8 @@
                                                                                
 attimp <- function(X, group,range=1:min(20,ncol(X)),
 	times=0,lX= if( class(X) == 'data.frame'){lX <- NULL} else {lX <- 1},
-	donames=T,fast=F,trans=1,maximp=20,xmiss=NULL,horiz=F,
-	main='Cluster',att.names=1:ncol(X),names.size=1,
+	donames=FALSE, fast=FALSE,trans=1,maximp=20,xmiss=NULL,horiz=FALSE,
+	main='Cluster',att.names=1:ncol(X), ord.names = FALSE, names.size=1,
 	ylim=c(0,wtave[o[1]]),ntick=20, rlines = TRUE, targ = NULL, lwd = 1, ..., cache = FALSE){
 
     nrx <- nrow(X)
@@ -92,7 +92,6 @@ attimp <- function(X, group,range=1:min(20,ncol(X)),
     }
     
     if(class(X)=='data.frame') X <- sapply(X, function(x) as.numeric(x))
-
 
   
    if (maximp<=0) stop(' maximp must have a positive value.')                  
@@ -136,7 +135,7 @@ attimp <- function(X, group,range=1:min(20,ncol(X)),
       if (horiz) { Xl='Importance'; yl=''}
       else { Xl=''; yl='Importance'}                                     
       if (donames) {                                           
-         bplot(wtave[o[range]],names=as.character(att.names[o[range]]),
+         bplot(wtave[o[range]],names=as.character(att.names[if(ord.names){o[range]}else{range}]),
             horiz=horiz,xlab=Xl,ylab=yl,zlim=ylim,trans=trans,ntk=ntick,
                names.size=names.size)       
         title(main)                                          
@@ -144,7 +143,9 @@ attimp <- function(X, group,range=1:min(20,ncol(X)),
       else {
          bplot(wtave[o[range]],ylab=yl,xlab=Xl,zlim=ylim,
             horiz=horiz,trans=trans,ntk=ntick)                      
-         title(main)                                 
+         title(main)
+         tickvalues = c(0,seq(0,sqrt(length(range)), length.out = 6)[-1])^2
+         axis(1, at = 1.2*tickvalues, labels = tickvalues)
       }                                                                
    }                                                                           
    else {                                                                      

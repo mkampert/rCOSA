@@ -25,7 +25,7 @@ hierclust <- function(D, main = "Hierarchical Clustering", leaflab = c("perpendi
 	hc$dendro <- as.dendrogram(hc, ...)
 
 	if(denplot){
-		plot(hc$dendro,sub = sub, xlab = xlab, ylab = ylab, leaflab = leaflab, main = main)
+		plot(hc$dendro,sub = sub, xlab = xlab, ylab = ylab, leaflab = leaflab, main = main, ...)
 		
 		if(length(groupnr) == attributes(hc$dendro)$members){
 			cols <- colv[groupnr + 1]
