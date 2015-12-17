@@ -18,7 +18,7 @@
 #'`
 #' @param donames \code{TRUE} / \code{FALSE} => do/don't show names of attributes on plot.                 
 #'  
-#' @param fast \code{TRUE} / \code{FALSE} => do/don't use fast approXimate calculation (less stable estimate). Should only be done with very large groups (when regular calculation takes way too long).
+#' @param fast \code{TRUE} / \code{FALSE} => do/don't use fast approximate calculation (less stable estimate). Should only be done with very large groups (when regular calculation takes way too long).
 #'
 #' @param trans power used to transform important scale.
 #'
@@ -46,12 +46,12 @@
 #'    \item{$att}{vector of attribute identities in descending order of importance.}
 #'
 #' @examples
-#' # make sure X and group are defined... see getclust?
-#' # at <- attimp(X,group[[2]])                                                     
-#' # at <- attimp(X,group[[1]], 1:100, trans=0.5, att.names=names, horiz=TRUE, main='Group 1')                                                          
-#' # at <- attimp(X,group[[3]],1:ncol(X),10,main='Group 3')                         
+#' # make sure X and group are defined... For that, see getclust.
+#' # at <- attimp(X, group[[2]])                                                     
+#' # at <- attimp(X, group[[1]], 1:100, trans = 0.5, att.names = names, horiz = TRUE, main= 'Group 1')                                                          
+#' # at <- attimp(X, group[[3]], 1:ncol(X), 10, main =' Group 3')                         
 #'
-#' @seealso \code{\link[COSA]{dendro}},\code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
+#' @seealso \code{\link[COSA]{dendro}}, \code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
 #' @export                                                                                                                                      
                                                                                
 attimp <- function(X, group,range=1:min(20,ncol(X)),

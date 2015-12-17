@@ -16,14 +16,14 @@ cosa2(X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)),
 \item{lX}{either an integer or a vector with as much elements as columns in \code{X}. This argument is ignored if \code{X} is a data.frame \cr
 \cr.
 Each element \code{lX[k]} represents a label for \code{X[,k]} as indicated below: \cr
-0 => ignore \code{X[,k]}, \cr
+0 => ignore \code{X[, k]}, \cr
 \cr
-\code{1} => \code{X[,k]} is a numeric attribute, no target value, \cr
-\code{2} => \code{X[,k]} is a numeric attribute, single target value, \cr
-\code{3} => \code{X[,k]} is a numeric attribute, dual target values, \cr
-\code{4} => \code{X[,k]} is a categorical attribute, no target value, \cr
-\code{5} => \code{X[,k]} is a categorical attribute, single target value, \cr
-\code{6} => \code{X[,k]} is a categorical attribute, dual target values. \cr
+\code{1} => \code{X[, k]} is a numeric attribute, no target value, \cr
+\code{2} => \code{X[, k]} is a numeric attribute, single target value, \cr
+\code{3} => \code{X[, k]} is a numeric attribute, dual target values, \cr
+\code{4} => \code{X[, k]} is a categorical attribute, no target value, \cr
+\code{5} => \code{X[, k]} is a categorical attribute, single target value, \cr
+\code{6} => \code{X[, k]} is a categorical attribute, dual target values. \cr
 \cr
 If only an integer scalar is give for \code{lX} than it is assumed that the integer value is the label for all columns in \code{X}. \cr Target values are specified in the targ, targ2 or qntls arguments (see below)\cr}
 
@@ -37,7 +37,7 @@ If only an integer scalar is give for \code{lX} than it is assumed that the inte
            \code{targ = "high"} => use the \code{qntls[2]} quantile of \code{X[,k]} as a single target value.    \cr
            \code{targ = "high/low"} => use the \code{qntls[1]} and \code{qntls[2]} quantiles of \code{X[,k]} as dual target values (see \code{qntls} argument described below). \cr}
 
-\item{knear}{size (number of objects) of near-neighborhoods used to calculate attribute weights for each object. By default \code{knear = sqrt(nrow(X))}, which, in the function, is being truncated to an  integer.
+\item{knear}{size of number of objects in the near-neighborhoods which is used to calculate attribute weights for each object. By default \code{knear = sqrt(nrow(X))}, which, inside the function, is truncated to an  integer.
 \cr}
 
 \item{xmiss}{numeric value for missings in the data, by default it is set to \code{NULL}. In case you have coded missings in the data differently by using a number then indicate that number in this argument. The coded value for missings must be larger than any data value on any input variable.
@@ -46,7 +46,7 @@ If only an integer scalar is give for \code{lX} than it is assumed that the inte
 \item{lambda}{multiple attribute clustering incentive parameter. By default, the regularization parameter lambda is set to equal \code{0.2}.
 \cr}
 
-\item{qntls}{quantiles used for calculating high and/or low targets (ignored if \code{lX[j] = 0},\code{1},\code{4} or \code{targ} is NOT set to \code{"low"}, \code{"high"}, or \code{"high/low"}). \cr
+\item{qntls}{quantiles used for calculating high and/or low targets (ignored if \code{lX[k] = 0},\code{1},\code{4} or \code{targ} is NOT set to \code{"low"}, \code{"high"}, or \code{"high/low"}). \cr
 \cr
 \code{qntls[1]} = data quantile on each attribute used for low target \cr
 \code{qntls[2]} = data quantile on each attribute used for high target \cr
@@ -55,7 +55,7 @@ NOTE: The \code{lX} vector and/or the value of \code{xmiss} can be specified as 
 \code{attr(X,"lX")<-lX} \cr
 \code{attr(X,"xmiss")<-xmiss} \cr
 \cr
-When present the attribute values will be used whenever the corresponding arguments are missing. Specifing an argument value overrides the corresponding attribute values if present. If the attribute and its corresponding argument are both missing, the default values above are used.
+When present the attribute values will be used whenever the corresponding arguments are missing. Specifying an argument value overrides the corresponding attribute values if present. If the attribute and its corresponding argument are both missing, the default values above are used.
 \cr
 \cr
 \cr
@@ -64,10 +64,10 @@ When present the attribute values will be used whenever the corresponding argume
 \item{niter}{the maximum number of inner iterations to stabilize the weights and dissimilarties given the homotopy parameter
 \cr}
 
-\item{noit}{the number of outer iterations ( make sure relax > 0 ) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end. <-- MK: "In a newer version this argument will hopefully be improved too."
+\item{noit}{the number of outer iterations ( make sure relax > 0 ) to transfer from the inverse exponential distance more closely to the sum of the weighted dissimilarities, obtained when a large enough number of outer iterations is chosen. Starting with the initial value of the homotopy parameter (equal to lambda) and using increments determined by relax one can calculate at what value the homotopy parameter will end.
 \cr}
 
-\item{stand}{equals `?\code{0} for no standardisation?, \code{1} for robust scaling of the data, and \code{2} for standard scaling of the data.
+\item{stand}{equals \code{0} for no standardisation, \code{1} for robust standard scaling of the data, and \code{2} for standard scaling of the data. The defeault equals \code{1}.
 \cr}
 
 \item{cosadir}{directory as a character string at which the executable COSA program can be found. By default it is specified as \code{NULL}, meaning that the executables in the COSA package are being used (which is advised).
@@ -78,28 +78,27 @@ When present the attribute values will be used whenever the corresponding argume
 
 \item{crit}{logical by default set to be \code{TRUE} meaning that the criterion and tuning parameters are given in the output.}
 
-\item{\code{targ2}}{the second target value when computing dual targeted dissimilarities. The \code{targ2[j]}  = second target value for \code{X[,k]}. The value is ignored if \code{lX[j] = 0},\code{1},\code{2},\code{4},\code{5}, or when \code{targ = "low"},\code{"high"}, or \code{"high/low"}.
+\item{pwr}{\code{1} for L_1 norm attribute distances, and \code{2} for L_2 norm attribute distances. The default equals \code{1}. This argument is ignored for categorical/ordinal attributes.}
+
+\item{\code{targ2}}{the second target value when computing dual targeted dissimilarities. The \code{targ2[j]}  = second target value for \code{X[,k]}. The value is ignored if \code{lX[k] = 0},\code{1},\code{2},\code{4},\code{5}, or when \code{targ = "low"},\code{"high"}, or \code{"high/low"}.
 \cr}
 }
 \value{
-This function outputs a list that has as the first element the call, as the second element the dissimilarity matrix \code{out$D} of class dist, and by default also the weights of class matrix, and, if \code{crit} is set to \code{TRUE}, the values of the tuning parameters are also given in the output. <-- MK: "In a newer version perhaps some other nice tweaks?"
+This function outputs a list that has as the first element the call, as the second element the dissimilarity matrix \code{out$D} of class dist, and by default also the weights of class matrix, and, if \code{crit} is set to \code{TRUE}, the values of the tuning parameters are also given in the output.
 }
 \description{
-*** BETA VERSION ***
- This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
 }
 \note{
 The output dissimilarity matrix can be used as input to most dissimilarity based clustering procedures in R in the same manner as the output of the procedure \code{\link[stats]{dist}}.
 }
 \examples{
-# Using the iris data as example:
-out <- cosa2(X = iris[,1:4])
-# Make a plot hierarchical clustering plot of the dissimilarities
-hierclust(out$D)
+data(ApoE3)
+out <- cosa2(X = ApoE3)
 # The weight of object 1 on attribute 1 in the NxP weight matrix W
-out$W[1,1]
+out$W[1, 1]
 # COSA procedure for dual targeted dissimilarities:
-out <- cosa2(X = iris[,1:4],lX = rep(3,ncol(iris[,1:4])),targ='high/low')
+out <- cosa2(X = iris[, 1:4], lX = rep(3, ncol(iris[, 1:4])), targ = 'high/low')
 }
 \author{
 Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman. \cr Correspondence: \email{mkampert@math.leidenuniv.nl}
@@ -109,6 +108,6 @@ Friedman, J. H. and Meulman, J. J. (2004). Clustering objects on subsets of attr
 Kampert, M.M., Meulman J.J., Friedman J.H. (2015). rCOSA: A Software Package for Clustering Objects on Subsets of Attributes \cr URL: \url{http://pub.math.leidenuniv.nl/~kampertmmd/}
 }
 \seealso{
-\code{\link[stats]{hclust}} and other functions that will be mentioned during the development of this package.
+\code{\link[rCOSA]{hierclust}}, \code{\link[rCOSA]{getclust}}, and \code{\link[rCOSA]{smacof}}.
 }
 

@@ -13,6 +13,8 @@ Imports:
     tools
 License: file LICENSE
 Collate:
+    'ApoE3.r'
+    'Xtoy.r'
     'attimp.R'
     'bplot.R'
     'attvalues.R'

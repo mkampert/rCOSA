@@ -9,21 +9,21 @@ boxatt(data, imps, grps, main = "Consider a maintitle here",
   SCALE = TRUE, colors = palette(), ...)
 }
 \arguments{
-\item{data}{data matrix obtained from COSA analysis}
+\item{data}{data matrix with numeric attributes}
 
 \item{imps}{typically a vector with attribute indices ordered on their importance}
 
-\item{grps}{...}
+\item{grps}{list for which each component contains the index numbers (row numbers in the data) of each group in an integer vector.}
 
-\item{main}{...}
+\item{main}{main title of the plot}
 
-\item{ylab}{...}
+\item{ylab}{label vertical axis}
 
-\item{xlab}{...}
+\item{xlab}{label horizontal axis}
 
 \item{SCALE}{logical TRUE/FALSE, whether to scale the data}
 
-\item{colors}{...}
+\item{colors}{by default set to \code{palette()}}
 
 \item{...}{named arguments to be passed to the default method.}
 }
@@ -34,7 +34,7 @@ values of attribute importances in requested order.
 This function plots the attribute weights over groups.
 }
 \examples{
-make sure an at object is available...
+# boxatt(data = ApoE3, imps = attWild$att[1:100],
 }
 \seealso{
 \code{\link[COSA]{attimp}}

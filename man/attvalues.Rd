@@ -37,11 +37,11 @@ The \code{lX} vector and/or the value of \code{xmiss} can be specified as attrib
 }
 \examples{
 #acquire object at from the attimp function?
-  #attvalues(X,gro	up[[2]],at$att[1:5])
-  #attvalues(X,group[[2]],at$att[6:10],all=T)
-  #attvalues(X,group[[4]],44,att.names='Att 44', group.name='Group 4')
+  #attvalues(X, group[[2]], at$att[1:5])
+  #attvalues(X, group[[2]], at$att[6:10], all=T)
+  #attvalues(X, group[[4]], 44, att.names = 'Att 44', group.name = 'Group 4')
 }
 \seealso{
-\code{\link[COSA]{dendro}},\code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
+\code{\link[COSA]{dendro}}, \code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
 }
 

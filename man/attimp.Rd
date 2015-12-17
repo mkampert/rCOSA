@@ -22,7 +22,7 @@ attimp(X, group, range = 1:min(20, ncol(X)), times = 0, lX = if (class(X)
 
 \item{donames}{\code{TRUE} / \code{FALSE} => do/don't show names of attributes on plot.}
 
-\item{fast}{\code{TRUE} / \code{FALSE} => do/don't use fast approXimate calculation (less stable estimate). Should only be done with very large groups (when regular calculation takes way too long).}
+\item{fast}{\code{TRUE} / \code{FALSE} => do/don't use fast approximate calculation (less stable estimate). Should only be done with very large groups (when regular calculation takes way too long).}
 
 \item{trans}{power used to transform important scale.}
 
@@ -58,12 +58,12 @@ This function computes and displays the revelance (importance) of each attribute
 the \code{lX} vector and/or the value of \code{xmiss} can be specified as attributes to the input data matrix before invoking attimp (see \code{\link[COSA]{cosa}})
 }
 \examples{
-# make sure X and group are defined... see getclust?
-# at <- attimp(X,group[[2]])
-# at <- attimp(X,group[[1]], 1:100, trans=0.5, att.names=names, horiz=TRUE, main='Group 1')
-# at <- attimp(X,group[[3]],1:ncol(X),10,main='Group 3')
+# make sure X and group are defined... For that, see getclust.
+# at <- attimp(X, group[[2]])
+# at <- attimp(X, group[[1]], 1:100, trans = 0.5, att.names = names, horiz = TRUE, main= 'Group 1')
+# at <- attimp(X, group[[3]], 1:ncol(X), 10, main =' Group 3')
 }
 \seealso{
-\code{\link[COSA]{dendro}},\code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
+\code{\link[COSA]{dendro}}, \code{\link[stats]{hclust}}, \code{\link[COSA]{getclust}}, and \code{\link[COSA]{attvalues}}.
 }
 
