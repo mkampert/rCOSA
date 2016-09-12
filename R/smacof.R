@@ -18,7 +18,7 @@
 #'
 #' @export                                                                               
                                         
-smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = "Multidimensional Scaling", pch = 16, PLOT = TRUE, VERBOSE = TRUE, ...)
+smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, colv = palette()[c(8,2,4,3,5,6,7,1)], main = "Multidimensional Scaling", k = 2, pch = 16, PLOT = TRUE, VERBOSE = TRUE, ...)
 {
         dhat<-ddelta<-D<-normdist(D)
         n<-dimdata(D)
@@ -26,7 +26,7 @@ smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, col
         ycol<-matrix(c(0,0),nrow=1,byrow=T)
 
 	    if (is.null(inicon)) {
-        	inicon <- cmdscale(D)
+        	inicon <- cmdscale(D, k)
     	}
 	    yy <- xx <- inicon
 
@@ -63,22 +63,22 @@ smacof <- function(D,niter = 100, interc = 1, inicon = NULL, groupnr = NULL, col
 	        cols <- 'black'	    			
 	    		}
 
-
-    	lims <- c( 
-    		ll = floor(100 * min( c(xx[, 1], xx[, 2]) ) )/100,        	
-    	    ul = ceiling(100 * max(c(xx[, 1], xx[, 2]) ) )/100
-    	    )  
-        
         if (PLOT){
+            lims <- c( 
+            ll = floor(100 * min( c(xx[, 1], xx[, 2]) ) )/100,        	
+            ul = ceiling(100 * max(c(xx[, 1], xx[, 2]) ) )/100
+          )  
+          
 	        	 # plot(xx,asp=1,type='n',xlab='Dimension 1 ',ylab='Dimension 2')
     	     # points(xx,asp=1,col="gray",pch=21,bg="gray")
     	     plot(xx, xlab = "Dimension 1", ylab = "Dimension 2",
     	    	main = main, xlim = lims, ylim = lims,
     	    	xaxs = "i", yaxs = "i", pch = pch, col = cols, ...)
-        	delta<- normdist(dhat)
-	        return(list(D=delta, X=xx, interc = interc))	
         }
-    
+
+    	delta<- normdist(dhat)
+    	return(list(D=delta, X=xx, interc = interc))	
+    	
 }
 
 

@@ -1,4 +1,4 @@
-bmat=function(dis,dist)
+bmat <- function(dis,dist)
 {
 	n<-nrow(dist)
 	nnn<-matrix(0,nrow=n,ncol=n)
@@ -17,6 +17,6 @@ bmat=function(dis,dist)
 		}
 		bb[i,i]<-bb[i,i]+sb
 	}
-	bmat<--bb
+	bmat<- -bb
 	return(bmat)
 }

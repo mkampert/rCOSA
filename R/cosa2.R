@@ -241,7 +241,7 @@ cosa2 <- function (X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)
     		}
     		
 		#CLI usage: ./COSA_2 iparms.cos rparms.cos lx.cos data.cos targs.cos dtargs.cos dist.cos weights.cos tunpar.cos
-		inoutfiles <- c("iparms.cos", "rparms.cos", "lx.cos", "data.cos", "targs.cos", "dtargs.cos", "dist.cos", "weights.cos", "tunpar.cos") 
+		inoutfiles <- c("iparms.cos", "rparms.cos", "lx.cos", "data.cos", "targs.cos", "dtargs.cos", "dist.cos", "weights.cos", "tunpar.cos", "itlog,txt")
 		extra_args <- paste(fnameprefix, inoutfiles, sep = "", collapse = " ") 
 
 	    switch(platform, 
