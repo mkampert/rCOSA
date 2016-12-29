@@ -11,7 +11,7 @@
 #' @param sub subtitle
 #' @param xlab label horizontal axis
 #' @param ylab label vertical axis
-#' @param the agglomeration method to be used. This should be (an unambiguous abbreviation of) one of \code{"ward"}, \code{"single"}, \code{"complete"}, \code{"average"}, \code{"mcquitty"}, \code{"median"} or \code{"centroid"}.
+#' @param method the agglomeration method to be used. This should be (an unambiguous abbreviation of) one of \code{"ward"}, \code{"single"}, \code{"complete"}, \code{"average"}, \code{"mcquitty"}, \code{"median"} or \code{"centroid"}.
 #' @param groupnr when known, each object can be given a number to which group it belongs
 #' @param colv vector containing color names for each group number
 #' @param ... arguments which can be parsed to either the \code{\link[mva]{hclust}} and \code{\link[stats]{dendrogram}} procedures.
