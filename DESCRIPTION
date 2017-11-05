@@ -1,6 +1,6 @@
 Package: rCOSA
 Title: Clustering Objects on Subsets of Attributes (COSA)
-Version: 0.1
+Version: 0.3
 Date: 2013-12-29
 Author: Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman
 Maintainer: Maarten M.D. Kampert <mkampert@math.leidenuniv.nl>
