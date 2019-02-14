@@ -11,7 +11,7 @@ Description: WARNING BETA VERSION. Implements the method of Friedman and
 Suggest: foreign
 Imports:
     tools
-License: file LICENSE
+License: GPL-2
 Collate:
     'ApoE3.r'
     'Xtoy.r'
