@@ -1,6 +1,6 @@
 #' COSA 2 Dissimilarities
 #'
-#'  This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the COSA package, see references below.
+#'  This function outputs a dissimilarity matrix of dissimilarities between the rows a data matrix computed by the COSA 2 algorithm. It is assumed that users are familiar with the COSA paper(s) or the vignette that comes with the rCOSA package, see references below.
 #'
 #'
 #' @param X input data.frame, or matrix object in numeric mode. COSA calculates the dissimilarities for the rows in X.
@@ -29,7 +29,7 @@
 #'            \code{targ = "high"} => use the \code{qntls[2]} quantile of \code{X[,k]} as a single target value.    \cr
 #'            \code{targ = "high/low"} => use the \code{qntls[1]} and \code{qntls[2]} quantiles of \code{X[,k]} as dual target values (see \code{qntls} argument described below). \cr
 #'
-#' @param \code{targ2} the second target value when computing dual targeted dissimilarities. The \code{targ2[j]}  = second target value for \code{X[,k]}. The value is ignored if \code{lX[k] = 0},\code{1},\code{2},\code{4},\code{5}, or when \code{targ = "low"},\code{"high"}, or \code{"high/low"}.
+#' @param targ2 the second target value when computing dual targeted dissimilarities. The \code{targ2[j]}  = second target value for \code{X[,k]}. The value is ignored if \code{lX[k] = 0},\code{1},\code{2},\code{4},\code{5}, or when \code{targ = "low"},\code{"high"}, or \code{"high/low"}.
 #' \cr
 #' @param knear size of number of objects in the near-neighborhoods which is used to calculate attribute weights for each object. By default \code{knear = sqrt(nrow(X))}, which, inside the function, is truncated to an  integer.
 #' \cr
@@ -48,11 +48,12 @@
 #' \cr
 #' When present the attribute values will be used whenever the corresponding arguments are missing. Specifying an argument value overrides the corresponding attribute values if present. If the attribute and its corresponding argument are both missing, the default values above are used.
 #' \cr
-# @param wtcomb by default is set to 'each', meaning that the maximum of the weights of object \code{X[i,]} and object \code{X[j,]} is choosen for each attribute \code{X[,k]}. One can also choose for the option 'whole', meaning that a whole weight vector is choosen of either object \code{i} or \code{j}, depending on which of the two vectors give the maximum weighted dissimilarity between object \code{i} and \code{j}.
+#'
+#' @param wtcomb by default is set to 'each', meaning that the maximum of the weights of object \code{X[i,]} and object \code{X[j,]} is choosen for each attribute \code{X[,k]}. One can also choose for the option 'whole', meaning that a whole weight vector is choosen of either object \code{i} or \code{j}, depending on which of the two vectors give the maximum weighted dissimilarity between object \code{i} and \code{j}.
 #' \cr
-# @param relax the number with which the homotopy parameter eta should be incremented at each outer iteration (for more info see noit)
+#' @param relax the number with which the homotopy parameter eta should be incremented at each outer iteration (for more info see noit)
 #' \cr
-# @param conv the convergence treshold that can reduce the maximum number of inner iterations.
+#' @param conv the convergence treshold that can reduce the maximum number of inner iterations.
 #' \cr
 #' @param niter the maximum number of inner iterations to stabilize the weights and dissimilarties given the homotopy parameter
 #' \cr
@@ -60,11 +61,6 @@
 #' \cr
 #' @param stand equals \code{0} for no standardisation, \code{1} for robust standard scaling of the data, and \code{2} for standard scaling of the data. The defeault equals \code{1}.
 #' \cr
-#' @param cosadir directory as a character string at which the executable COSA program can be found. By default it is specified as \code{NULL}, meaning that the executables in the COSA package are being used (which is advised).
-#' \cr
-#' @param wghts logical by default set to be \code{TRUE} meaning that the weights are given in the output
-#' \cr
-#' @param crit logical by default set to be \code{TRUE} meaning that the criterion and tuning parameters are given in the output.
 #' @param pwr \code{1} for L_1 norm attribute distances, and \code{2} for L_2 norm attribute distances. The default equals \code{1}. This argument is ignored for categorical/ordinal attributes.
 #'
 #' @return
@@ -73,18 +69,18 @@
 #'
 #' @references
 #' Friedman, J. H. and Meulman, J. J. (2004). Clustering objects on subsets of attributes. \cr URL: \url{http://www-stat.stanford.edu/~jhf/ftp/cosa.pdf}
-#' Kampert, M.M., Meulman J.J., Friedman J.H. (2015). rCOSA: A Software Package for Clustering Objects on Subsets of Attributes \cr URL: \url{http://pub.math.leidenuniv.nl/~kampertmmd/}
+#' Kampert, M.M., Meulman J.J., Friedman J.H. (2017). rCOSA: A Software Package for Clustering Objects on Subsets of Attributes \cr URL: \url{https://link.springer.com/article/10.1007/s00357-017-9240-z}
 #'
 #' @author Maarten M.D. Kampert, Jacqueline J. Meulman, and Jerome H. Friedman. \cr Correspondence: \email{mkampert@@math.leidenuniv.nl}
 #'
 #'
 #' @examples
 #' data(ApoE3)
-#' out <- cosa2(X = ApoE3)
+#' rslt_dflt_cosa2 <- cosa2(X = ApoE3)
 #' # The weight of object 1 on attribute 1 in the NxP weight matrix W
-#' out$W[1, 1]
+#' rslt_dflt_cosa2$W[1, 1]
 #' # COSA procedure for dual targeted dissimilarities:
-#' out <- cosa2(X = iris[, 1:4], lX = rep(3, ncol(iris[, 1:4])), targ = 'high/low')
+#' rslt_duotrg_cosa <- cosa2(X = iris[, 1:4], lX = rep(3, ncol(iris[, 1:4])), targ = 'high/low')
 #'
 #'
 #' @note
@@ -96,77 +92,75 @@
 #'
 #' @export
 
-cosa2 <- function (X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)),
-                      xmiss = NULL, lambda = 0.2, qntls = c(0.05, 0.95), wtcomb = "each",
-                      relax = 0.1, conv = 1e-05, niter = 1, noit = 100, stand = 1,
-                      cosadir = NULL, wghts = TRUE, crit = TRUE, clean = TRUE, fnameprefix = NULL, pwr = 1, ...)
-{
+cosa2 <- function(X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)),
+                  xmiss = NULL, lambda = 0.2, qntls = c(0.05, 0.95), wtcomb = "each",
+                  relax = 0.1, conv = 1e-05, niter = 1, noit = 100, stand = 1, pwr = 1) {
 
-  #	OUT <- list(call = match.call())
-  OUT <- list(call = sys.call())
+  OUT <- vector(length = 4, mode = "list")
+  names(OUT) <- c("call", "D", "W", "tunpar")
+  OUT$CALL <- sys.call()
 
+  # Dimensions X:
+  nrx <- as.integer(nrow(X))
+  ncx <- as.integer(ncol(X))
 
-  # Find the executable and OS platform
-  OSx = grep(c("x86_64"), R.version$platform) && grep(c("apple"),
-                                                      R.version$platform)
-  linux = grep(c("x86_64"), R.version$platform) && grep(c("linux"),
-                                                        R.version$platform)
-  win32 = grep(c("i386"), R.version$platform) && grep(c("mingw32"),
-                                                      R.version$platform)
-  win64 = grep(c("x86_64"), R.version$platform) && grep(c("mingw32"),
-                                                        R.version$platform)
-  platform = c("OSx", "linux", "win32", "win64")[!c(is.na(OSx),
-                                                    is.na(linux), is.na(win32), is.na(win64))]
-  if (is.null(cosadir)) {
-    cosadir = paste(searchpaths()[search() == "package:rCOSA"],
-                    "/execs/", platform, sep = "")
-  }
-
-  wd <- getwd()
-
-  # Targeting section
-  if (is.null(targ)){
-    ktarg = 1
+  # Arrange the Targeting:
+  if (is.null(targ)) {
+    ktarg <- 1L
   } else if (is.numeric(targ)) {
-    ktarg = 0
+    ktarg <- 0L
   } else if (targ == "high") {
-    ktarg = 1
+    ktarg <- 1L
   } else if (targ == "high/low") {
-    ktarg = 1
+    ktarg <- 1L
   } else if (targ == "low") {
-    ktarg = 2
+    ktarg <- 2L
   } else {
     warning(paste(as.character(targ), "   invalid value for targ."))
   }
 
   if (is.null(targ2)) {
-    ltarg = 0
+    ltarg <- 0L
   } else {
-    ltarg = 1
+    ltarg <- 1L
   }
 
+  tg <- cbind(
+    if (ktarg == 0) {
+      targ
+    } else {
+      rep(qntls[2], ncx)
+    },
+    if (ltarg) {
+      targ2
+    } else {
+      rep(qntls[1], ncx)
+    }
+  )
+  storage.mode(tg) <- "double"
 
-  # Variables labels and Data section
 
-  nrx <- nrow(X)
-  ncx <- ncol(X)
+  # Setting the Attribute Flags (1 - 6):
 
-  seltarg <- if(!is.null(targ)){
-    2*targ%in%c('low','high') + 3*(targ =='high/low')
+  seltarg <- if (!is.null(targ)) {
+    2 * targ %in% c("low", "high") + 3 * (targ == "high/low")
   } else {
     1
   }
 
-  if(length(lX) == ncx){
-    lXt <- lX     # labels X temporarily
-  } else if(length(lX) == 1) {
+  if (length(lX) == ncx) {
+    lXt <- lX
+  } else if (length(lX) == 1) {
     lXt <- rep(lX, ncx)
     lX <- lXt
-  } else if (is.null(lX) && (class(X) == 'data.frame')){
-    lXt <- sapply(X, function(x){
-      if(class(x) %in% c('numeric','double','integer')){
+  } else if (is.null(lX) && (class(X) == "data.frame")) {
+    lXt <- sapply(X, function(x) {
+      if (class(x) %in% c("numeric", "double", "integer")) {
         out <- (1:3)[seltarg]
-      } else if (class(x) %in% c('factor', 'character', 'logical')){
+      } else if (class(x) %in% c(
+        "factor", "character",
+        "logical"
+      )) {
         out <- (4:6)[seltarg]
       } else {
         stop("columns in X can only be of class factor or numeric")
@@ -174,133 +168,78 @@ cosa2 <- function (X, lX = NULL, targ = NULL, targ2 = NULL, knear = sqrt(nrow(X)
     })
     X <- sapply(X, function(x) as.numeric(x))
     lX <- lXt
-    #    	rewrite X to matrix here!
   } else {
     stop("argument lX cannot be NULL when X is not a data.frame")
   }
+  lX <- as.integer(lX)
 
-  if(class(X)=='data.frame') X <- sapply(X, function(x) as.numeric(x))
 
-  # Missing section
+  # Preparing the Data for Fortran (including missings):
+
+  if (class(X) == "data.frame") X <- sapply(X, function(x) as.numeric(x))
 
   if (missing(xmiss) && !is.null(attr(X, "xmiss"))) {
-    xmisst = attr(X, "xmiss")
+    xmisst <- attr(X, "xmiss")
     X[is.na(X)] <- xmisst
-  } else if (is.null(xmiss)){
+  } else if (is.null(xmiss)) {
     xmisst <- max(9.9e+30, max(X, na.rm = TRUE) + 1)
+    xmisst <- as.double(xmisst)
     X[is.na(X)] <- xmisst
   } else {
-    xmisst = xmiss
+    xmisst <- as.double(xmiss)
   }
+  storage.mode(X) <- "double"
 
-
-  # weight combination section
-
+  # Weighting strategy for dissimis...
   if (wtcomb == "each") {
-    wtcom <- 1
+    wtcom <- 1L
   } else if (wtcomb == "whole") {
-    wtcom <- 2
+    wtcom <- 2L
   } else {
-    wtcom <- 1
+    wtcom <- 1L
     warning(paste(as.character(wtcomb), " - invalid value for wtcomb: wtcomb='each' used."))
   }
 
+  # All remaining integer parameters
+  ipams <- c(niter, noit, stand, wtcom, ktarg, ltarg, itot = 0)
+  ipams <- as.integer(ipams)
+  kn <- as.integer(trunc(knear))
 
-  ic <- c(nrx, ncx, trunc(knear), ktarg, niter, wtcom, ltarg,
-          noit, stand)
+  # All remaining double parameters:
+  dpams <- c(xmisst, lambda, qntls, relax, conv, pwr,
+             crit1 = 0.0, crit2 = 0.0, eps = 0.0
+  )
+  dpams <- as.double(dpams)
+  wi <- matrix(0, nrow = nrx, ncol = ncx)
+  storage.mode(wi) <- "double"
 
+  double.n2 <- double(nrx * (nrx - 1) / 2)
 
-  # Start writing binary files:
-  # setwd(cosadir)
-
-  zz <- file(paste(fnameprefix,"iparms.cos", sep = ""), "wb")
-  writeBin(as.integer(ic), zz, size = 4)
-  close(zz)
-
-  zz <- file(paste(fnameprefix,"lx.cos", sep = ""), "wb")
-  writeBin(as.integer(lXt), zz, size = 4)
-  close(zz)
-
-  zz <- file(paste(fnameprefix,"rparms.cos", sep = ""), "wb")
-  writeBin(as.double(c(xmisst, lambda, qntls, relax, conv, pwr)),
-           zz, size = 4)
-  close(zz)
-
-  zz <- file(paste(fnameprefix,"data.cos", sep = ""), "wb")
-  writeBin(as.double(X), zz, size = 4)
-  close(zz)
-
-  if (ktarg == 0) {
-    zz <- file(paste(fnameprefix,"targs.cos", sep = ""), "wb")
-    writeBin(as.double(targ), zz, size = 4)
-    close(zz)
-  }
-  if (ltarg == 1) {
-    zz <- file(paste(fnameprefix,"dtargs.cos", sep = ""), "wb")
-    writeBin(as.double(targ2), zz, size = 4)
-    close(zz)
-  }
-
-  #CLI usage: ./COSA_2 iparms.cos rparms.cos lx.cos data.cos targs.cos dtargs.cos dist.cos weights.cos tunpar.cos
-  inoutfiles <- c("iparms.cos", "rparms.cos", "lx.cos", "data.cos", "targs.cos", "dtargs.cos", "dist.cos", "weights.cos", "tunpar.cos", "itlog.txt")
-  extra_args <- paste(fnameprefix, inoutfiles, sep = "", collapse = " ")
-
-  progr <- paste0(cosadir,"/COSA_2")
-
-  tryCatch(switch(platform,
-                  OSx = system(paste(progr, extra_args, sep = " "), ...),
-                  linux = system(paste(progr, extra_args, sep = " "), ...),
-                  win64 = system(paste("cmd.exe /c",paste0(progr,".exe"), extra_args, sep = " "), minimized = F, invisible = FALSE, show.output.on.console = TRUE, ...)
-  ), error = function(e) {cat("ERROR :",conditionMessage(e), "\n")}
+  Z <- .Fortran("cosa",
+                no = nrx, ni = ncx, kn = kn, x = X,
+                ip = ipams, dp = dpams, lx = lX, tg = tg,
+                d = double.n2, wi = wi, PACKAGE = "rCOSA"
   )
 
-
-  zz = file(paste(fnameprefix,"dist.cos", sep = ""), "rb")
-  dis = readBin(zz, numeric(), size = 4, n = nrx * (nrx - 1)/2)
-  close(zz)
-  attr(dis, "Size") = nrx
+  dis <- Z$d
+  attr(dis, "Size") <- nrx
   class(dis) <- "dist"
-  OUT$D = as.dist(dis)
-  OUT$D = normdist(OUT$D)
-  if (wghts) {
-    zz = file(paste(fnameprefix,"weights.cos", sep = ""), "rb")
-    weights = readBin(zz, numeric(), size = 4, n = nrx * ncx)
-    close(zz)
-    weights = matrix(weights, ncol = ncx, nrow = nrx)
-    OUT$W = (ncx)*weights/rowSums(weights)
-  }
-  #if (sdat) {
-  #    zz = file(paste(cosadir,"/",fnameprefix,"sdata.cos", sep = ""), "rb")
-  #	sdata = readBin(zz, numeric(), size = 4, n = nrx * ncx)
-  #    close(zz)
-  #    DAT = matrix(sdata, ncol = ncx, nrow = nrx)
-  # 	DAT[DAT == xmiss] = NA
-  #     OUT$DAT = DAT
-  #}
+  OUT$D <- as.dist(dis)
+  # OUT$D = rCOSA:::normdist(OUT$D)
 
-  if (crit) {
-    zz = file(paste(fnameprefix,"tunpar.cos", sep = ""), "rb")
-    tunpar = readBin(zz, numeric(), size = 4, n = 7)
-    close(zz)
-    #tunpar[5:7] = as.integer(tunpar[5:7]) # has no use.... all elements should have the same class.
-    names(tunpar) = c("crit", "lambda", 'homotopy', 'RMSD', 'Knn', 'noit', 'totit')
-    #print(tunpar)
-    OUT$tunpar = as.list(tunpar)
-  }
+  OUT$W <- Z$wi
+  # OUT$W = (ncx) * OUT$W/rowSums(OUT$W)
 
-  if(clean & any(platform%in%c("win32","win64"))) {
-    system(paste("cmd.exe /c DEL ",fnameprefix,"*.cos", sep = ""))
-    #system(paste("rm ", cosadir, "/",fnameprefix,"*.666", sep = ""))
-  } else {
-    if(clean & any(platform%in%c("linux","OSx"))){
-      system(paste("rm ",fnameprefix,"*.cos", sep = ""))
-    }
-    #system(paste("rm ", cosadir, "/",fnameprefix,"*.666", sep = ""))
-  }
+  OUT$tunpar <- c(
+    Z$dp[8], Z$dp[2], Z$dp[10], Z$dp[9], kn,
+    ipams[2], ipams[7], ipams[1], Z$dp[7], Z$dp[6], Z$dp[5]
+  )
+  names(OUT$tunpar) <- c(
+    "crit", "lambda", "homotopy", "critrb",
+    "Knn", "noit", "totit", "maxinit", "pwr", "conv", "relax"
+  )
 
-  # setwd(wd)# any function?
+  # OUT$targets <- Z$tg
+
   return(OUT)
 }
-
-
-

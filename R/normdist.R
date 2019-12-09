@@ -1,4 +1,4 @@
-#' Normalize the distance 
+#' Normalize the distance
 #'
 #'
 #' Normalize the dissimilarities sucht that the squared norm of the Dissimilarities equals N, the number of objects.
@@ -11,10 +11,9 @@
 #' Returns a normalised version of D of similar class and mode.
 
 
-normdist=function(D)
-{
-        fac<-sum(D**2)
-        n<-dimdata(D)
-        D<-D*((n/fac)**.5)
-        return(D)
+normdist <- function(D) {
+  fac <- sum(D**2)
+  n <- dimdata(D)
+  D <- D * ((n / fac)**.5)
+  return(D)
 }
